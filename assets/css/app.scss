@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/bootstrap";
+
+
+:root {
+
+    --gray-dark: #343a40;
+    --primary: #FE9477;
+    --secondary: #FD582B;
+    --success: #FE9477;
+    --danger: #ff4136;
+    --light: #D2D2D2;
+    --dark: #1C0A05;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+$bg = var(--light);
+$mainColor = var(--primary);
+body {
+    background-color:$bg;
+}
+
+.navbar-light {
+    background-color: $mainColor;
+}
