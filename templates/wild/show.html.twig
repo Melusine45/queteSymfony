@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+{% block header %}
+    {%  include 'navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+    <h1>{{ page }}</h1>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+</body>
+</html>
