@@ -61,41 +61,38 @@ class WildController extends AbstractController
             'program' => $program,
             'slug' => $slug,
         ]);
-
-        /* code écrit pour la quête Symfony 05 le routing avancé
-         * if (empty($slug)){
-            return $this->render('wild/show.html.twig', [
-                'slug' => $slug]);
-        } else {
-            $slug = str_replace("-", " ", $slug);
-            $slug = ucwords($slug);
-
-            return $this->render('wild/show.html.twig', [
-                'slug' => $slug,
-            ]);
-        }
-        */
     }
 
     /**
-     * @Route("/wild/showbycategory/{category}", defaults={"category" = null}, name="wild_showbycategory")
+     * @Route("/wild/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="wild_category")
      * @param string $categoryName
      * @return Response
      */
     public function showByCategory(string $categoryName): Response
     {
-        //Utilise la méthode  du repository Category::class apropriée afin de récupérer l'objet Category
-        // correspondant à la chaine de caratére récupérée depuis l’URL.
+        if (!$categoryName) {
+            throw $this
+                ->createNotFoundException('No category Name has been sent to find a program in program\'s table.');
+        }
 
-        //Dans la même méthode, à partir de l’objet Category fraîchement récupéré, appelle la méthode findBy()
-        // ou la méthode magique appropriée sur le repository Program::class afin de parcourir toutes les séries
-        // liées à la catégorie courante
+        $categoryName = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findOneBy(['name' => mb_strtolower($categoryName)]);
+        if (!$categoryName) {
+            throw $this->createNotFoundException(
+                'No program with ' . $categoryName . ' title, found in program\'s table.'
+            );
+        }
 
-        //Enfin, ajoute une limite de 3 séries et un tri par id décroissant à la récupération des séries.
+        $programs = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findBy(['category' => $categoryName], ['id' => 'desc'], 3);
+
 
         return $this->render('wild/category.html.twig', [
-            'categoryName' => $categoryName
-        ]);
+            'category' => $categoryName,
+            'programs' => $programs,
 
+        ]);
     }
 }

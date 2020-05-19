@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ categoryName }}{% endblock %}
+{% block title %}Wild Séries {{ category.name }}{% endblock %}
 
 {% block body %}
-    <h1> {{ categoryName }}</h1>
+    <h1> {{ category.name }}</h1>
+    <div class="media">
+        <div class="media-body">
+            {% for program in programs %}
+            <h2 class="mt-0">{{ program.title }}</h2>
+            <p>{{ program.summary }}</p>
+            <p>Categorie : {{ program.category.name }}</p>
+            {%  endfor %}
+        </div>
 
+    </div>
 {% endblock %}
