@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
@@ -36,6 +38,16 @@ class Program
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Season", mappedBy="program")
+     */
+    private $seasons;
+
+    public function __construct()
+    {
+        $this->seasons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +99,45 @@ class Program
     {
         $this->category = $category;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|Season[]
+     */
+    /**
+     * @return Collection
+     */
+    public function getSeasons(): Collection
+    {
+        return $this->seasons;
+    }
+
+    /**
+     * param Season $season
+     * @return Program
+     */
+    public function addSeason(Season $season): self
+    {
+        if (!$this->seasons->contains($season)) {
+            $this->seasons[] = $season;
+            $season->setProgram($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Season $season
+     * @return Program
+     */
+    public  function removeSeason(Season $season): self
+    {
+        if (!$this->seasons->contains($season)) {
+            $this->seasons->removeElement($season);
+            if ($season->getProgram() === $this) {
+                $season->setProgram(null);
+            }
+        }
         return $this;
     }
 }
