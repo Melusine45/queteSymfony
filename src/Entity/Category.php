@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -57,6 +57,7 @@ class Category
     {
         return $this->programs;
     }
+
     /**
      * param Program $program
      * @return Category
@@ -67,7 +68,6 @@ class Category
             $this->programs[] = $program;
             $program->setCategory($this);
         }
-
         return $this;
     }
 
@@ -75,17 +75,16 @@ class Category
      * @param Program $program
      * @return Category
      */
-
     public function removeProgram(Program $program): self
     {
         if ($this->programs->contains($program)) {
             $this->programs->removeElement($program);
             // set the owning side to null (unless already changed)
-            if ($program->getCategory() === $this) {
+            if($program->getCategory() === $this) {
                 $program->setCategory(null);
             }
         }
-
         return $this;
     }
+
 }
