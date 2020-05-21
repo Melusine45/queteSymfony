@@ -17,7 +17,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ path('wild_index') }}" disabled="">Toutes les séries</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('wild_category') }}">Trier par Genre</a>
+                        <a class="dropdown-item" disabled="">Trier par Genre</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'category' : "aventure"}) }}">Aventure</a>
                         <a class="dropdown-item" href="#" disabled="">Something else here</a>
                     </div>
                 </li>
