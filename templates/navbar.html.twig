@@ -17,9 +17,15 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ path('wild_index') }}" disabled="">Toutes les séries</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" disabled="">Trier par Genre</a>
-                        <a class="dropdown-item" href="{{ path('wild_category', { 'category' : "aventure"}) }}">Aventure</a>
-                        <a class="dropdown-item" href="#" disabled="">Something else here</a>
+                        <a class="nav-link" disabled="">Trier par Genre</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "aventure"}) }}">Aventure</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "action"}) }}">Action</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "comedie"}) }}">Comedie</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "fantastique"}) }}">Fantastique</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "horreur"}) }}">Horreur</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "drame"}) }}">Drame</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "science-fiction"}) }}">Science Fiction</a>
+                        <a class="dropdown-item" href="{{ path('wild_category', { 'categoryName' : "thriller"}) }}">Thriller</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
