@@ -3,7 +3,7 @@
 
 :root {
 
-    --gray-dark: #343a40;
+    --gray-dark: #cecece;
     --primary: #fe9477;
     --secondary: #FD582B;
     --success: #FE9477;
@@ -22,27 +22,44 @@ $bg: var(--light);
 $mainColor: var(--primary);
 $mynewcolor:#fe9477;
 $background-light: #eeebeb;
-
+$title:#FD582B;
+$gray-dark: #cecece;
+$darker: #8e8e8e;
 .navbar-light {
     background-color:$mainColor;
 }
 
-
 .btn-primary {
-    @include button-variant($background-light, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+    @include button-variant($gray-dark, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
 }
 
 .btn-outline-primary {
     @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
 
 }
+h1{
+    color: $darker;
+}
+h2 {
+    color:$title;
+}
+h3 {
+    color: $dark;
+}
+
+h4 {color: var(--danger);
+}
+.media{
+    margin: 20px;
+}
 .card-deck{
     width: 25%;
 }
 .card{
-    margin: 0 auto; /* Added */
-    float: none; /* Added */
-    margin-bottom: 10px; /* Added */
+
+    float: none;
+    margin: 10px;
+    background-color: $bg;
 }
 .card-img-top {
     width: 100%;
