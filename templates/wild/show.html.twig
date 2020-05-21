@@ -4,14 +4,15 @@
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <img class="img-fluid" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
             <h1 class="mt-0">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
             <p>Categorie : {{ program.category.name }}</p>
+            <a href=" {{ path('wild_program', {'programTitle' : program.title | lower | replace({' ':'-'})}) }} ">voir toutes les saisons</a>
         </div>
     </div>
-    <a href="{{ path('wild_index') }}">
+    <a href="{{ path('wild_index') }}" class="btn btn-primary">
         Retour à l'accueil
     </a>
 

@@ -23,8 +23,6 @@ $mainColor: var(--primary);
 $mynewcolor:#fe9477;
 $background-light: #eeebeb;
 
-
-
 .navbar-light {
     background-color:$mainColor;
 }
@@ -51,4 +49,8 @@ $background-light: #eeebeb;
     height: 15vw;
     object-fit: cover;
     object-position: center;
+}
+.img-fluid{
+    width: 25%;
+    margin: 10px;
 }

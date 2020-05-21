@@ -6,10 +6,18 @@
     <h1> {{ category.name }}</h1>
     <div class="media">
         <div class="media-body">
-            {% for program in programs %}
-            <h2 class="mt-0">{{ program.title }}</h2>
-            <p>{{ program.summary }}</p>
-            <p>Categorie : {{ program.category.name }}</p>
+             {% for program in programs %}
+                <div class="card-deck mb-5">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ program.poster }}" alt="{{ program.title }} poster">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ loop.index }} / {{ program.title }}</h5>
+                            <h6 class="card-title"> Catégorie : {{ program.category.name }}</h6>
+                            <p class="card-text">{{ program.summary }}</p>
+                            <a href="{{ path('wild_show', {'slug' : program.title | lower | replace({' ':'-'})}) }}" class="btn btn-primary">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
             {%  endfor %}
         </div>
     </div>

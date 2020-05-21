@@ -11,6 +11,7 @@
             <p>{{ season.description }}</p>
         </div>
     </div>
+    <br>
     <div class="media">
         <div class="media-body">
             {% for episode in episodes %}
@@ -18,10 +19,12 @@
             <h3 class="mt-0">Episode {{ episode.number }} </h3>
                     <h4>{{ episode.title }}</h4>
                 <p>{{ episode.synopsis }}</p>
+                <a href="{{ path('wild_program', {'programTitle' : program.title | lower | replace({' ':'-'})}) }}">Retour aux saisons</a>
+                <p></p>
             {%  endfor %}
         </div>
     </div>
-    <a href="{{ path('wild_index') }}">
+    <a href="{{ path('wild_index') }}" class="btn btn-primary">
         Retour à l'accueil
     </a>
 
