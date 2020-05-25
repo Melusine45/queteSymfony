@@ -25,7 +25,7 @@ class WildController extends AbstractController
             ->findAll();
 
         if (!$programs) {
-            throw $this->createNotFoundException('No program found in program\'s tble');
+            throw $this->createNotFoundException('No program found in program\'s table');
         }
 
         return $this->render('wild/index.html.twig', [
@@ -33,37 +33,6 @@ class WildController extends AbstractController
         ]);
     }
 
-    /**
-     * Getting a program with a formatted slug for title
-     *
-     * @Route("/wild/show/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="wild_show")
-     * @param string $slug The slugger
-     * @return Response
-     */
-    public function show(?string $slug) : Response
-    {
-        if (!$slug) {
-            throw $this
-                ->createNotFoundException('No slug has been sent to find a program in program\'s table.');
-        }
-        $slug = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($slug)), "-")
-        );
-        $program = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findOneBy(['title' => mb_strtolower($slug)]);
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with ' . $slug . ' title, found in program\'s table.'
-            );
-        }
-
-        return $this->render('wild/show.html.twig', [
-            'program' => $program,
-            'slug' => $slug,
-        ]);
-    }
 
     /**
      * @Route("/wild/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="wild_category")
@@ -99,36 +68,28 @@ class WildController extends AbstractController
     }
 
     /**
-     * @Route("/wild/program/{programTitle<^[a-z0-9-]+$>}", defaults={"programTitle" = null}, name="wild_program")
-     * @param string $programTitle
+     * @Route("/wild/show/{id}", name="wild_show")
      * @return Response
      */
-    public function showByProgram(string $programTitle): Response
+    public function show(program $program): Response
     {
-        if (!$programTitle) {
+        if (!$program) {
             throw $this
                 ->createNotFoundException('No program Name has been sent to find a program in program\'s table.');
         }
-        $programTitle = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($programTitle)), "-")
-        );
 
-        $programTitle = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findOneBy(['title' => mb_strtolower($programTitle)]);
-        if (!$programTitle) {
+        if (!$program) {
             throw $this->createNotFoundException(
-                'No program with ' . $programTitle . ' title, found in program\'s table.'
+                'No program found in program\'s table.'
             );
         }
 
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
-            ->findBy(['program' => $programTitle], ['id' => 'asc']);
+            ->findBy(['program' => $program], ['id' => 'asc']);
 
         return $this->render('wild/program.html.twig', [
-            'program' => $programTitle,
+            'program' => $program,
             'seasons' => $seasons,
 
         ]);
@@ -164,7 +125,21 @@ class WildController extends AbstractController
             'program' => $season->getProgram(),
             'season' => $season,
             'episodes' => $episodes,
-
         ]);
     }
+
+
+    /**
+     * @Route("/wild/episode/{id}", name="wild_episode")
+     */
+    public function showEpisode(Episode $episode, Season $season): Response
+    {
+
+        return $this->render('wild/episode.html.twig', [
+            'episode'=>$episode,
+            'season'=>$episode->getSeason(),
+            'program'=>$season->getProgram(),
+        ]);
+    }
+
 }
