@@ -20,13 +20,24 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/add", name="category_add", methods={"GET","POST"})
      */
-    public function newCategory(Request $request): Response
+    public function add(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('category_add');
+        }
+
         $categories = $this->getDoctrine()
             ->getRepository(Category::class)
             ->findAll();
+
         return $this->render('category/add.html.twig', array(
             'category' => $category,
             'form' => $form->createView(),
