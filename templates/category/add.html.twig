@@ -2,14 +2,18 @@
 {% block title %}Wild Séries Edit{% endblock %}
 {% block body %}
     <h1> Ajouter une catégorie</h1>
-
+<div class="form m-3">
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit" name="btnSearch" class="btn btn-primary">Ajouter</button>
     {{ form_end(form) }}
+</div>
+    <h2 class="m-3">Liste des catégories</h2>
 
-    <h2>Liste des catégories</h2>
     {% for category in categories %}
-    <p>{{ category.name }}</p>
+
+        <p class="m-3">{{ category.name }}</p>
+
     {% endfor %}
+
 {% endblock %}

@@ -151,6 +151,4 @@ class WildController extends AbstractController
             'episode' => $episode,
         ]);
     }
-
-
 }
