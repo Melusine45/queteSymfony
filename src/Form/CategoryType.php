@@ -13,7 +13,6 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('searchField')
             ->add('name', TextType::class)
         ;
     }

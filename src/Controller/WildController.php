@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\ProgramSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -150,4 +151,6 @@ class WildController extends AbstractController
             'episode' => $episode,
         ]);
     }
+
+
 }
