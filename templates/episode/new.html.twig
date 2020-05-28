@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Episode{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un épisode</h1>
+<div class="form-group">
+    {{ include('episode/_form.html.twig') }}
+</div>
+    <a class="btn btn-back" href="{{ path('episode_index') }}">retour à la liste</a>
+{% endblock %}

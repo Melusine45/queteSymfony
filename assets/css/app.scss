@@ -25,17 +25,24 @@ $background-light: #eeebeb;
 $title:#FD582B;
 $gray-dark: #cecece;
 $darker: #8e8e8e;
+$danger: #7d0b0b;
+
 .navbar-light {
     background-color:$mainColor;
 }
 
 .btn-primary {
     @include button-variant($gray-dark, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+    margin: 10px;
+}
+.btn-back {
+    @include button-variant($gray-dark, darken($darker, 7.5%), darken($darker, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+    margin: 10px;
 }
 
-.btn-outline-primary {
-    @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
-
+.btn-delete {
+    @include button-outline-variant($danger, $gray-dark, lighten($danger,5%), $mynewcolor);
+    margin: 10px;
 }
 h1{
     color: $darker;
@@ -70,4 +77,15 @@ h4 {color: var(--danger);
 .img-fluid{
     width: 25%;
     margin: 10px;
+}
+
+input {
+    min-width: 300px;
+    width: 500px;
+}
+
+textarea {
+    min-width: 300px;
+    min-height: 200px;
+    width: 500px;
 }
