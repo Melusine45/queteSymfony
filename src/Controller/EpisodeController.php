@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Episode;
+use App\Entity\Season;
 use App\Form\EpisodeType;
+use App\Form\SeasonType;
 use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
