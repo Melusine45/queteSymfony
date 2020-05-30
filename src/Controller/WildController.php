@@ -176,10 +176,11 @@ class WildController extends AbstractController
      */
     public function actorProgram(Actor $actor): Response
     {
-
+        $programs = $actor->getPrograms();
 
         return $this->render('wild/actor.html.twig', [
             'actor' => $actor,
+            'programs' => $programs
         ]);
     }
 }
