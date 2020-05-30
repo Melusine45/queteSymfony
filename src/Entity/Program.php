@@ -24,8 +24,8 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(message="ne me laisse pas tout vide")
-     * @Assert\Length(max="255", maxMessage="La catégorie saisie {{ value }} est trop longue, elle ne devrait pas dépasser {{ limit }} caractères")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ")
+     * @Assert\Length(max="255", maxMessage="Le nom de série saisie {{ value }} est trop long, il ne devrait pas dépasser {{ limit }} caractères")
      * @Assert\Regex(pattern="/plus belle la vie/i", match=false, message="On parle de vraies séries ici")
      *
      */
@@ -33,7 +33,7 @@ class Program
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     * @Assert\NotBlank(message="Veuillez remplir ce champ")
      */
     private $summary;
 
