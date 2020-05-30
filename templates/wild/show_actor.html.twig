@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les acteurs{% endblock %}
+
+{% block body %}
+    <h1>Tous les acteurs</h1>
+    <div class="row justify-content-lg-around ">
+    {% for actor in actors %}
+        <div class="card-deck mb-5">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h6 class="card-title"> {{ actor.name }}</h6>
+                    <a href="{{ path('wild_actor', {'id' : actor.id }) }}" class="btn btn-primary">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        </div>
+        Aucun acteur trouvé.
+    {% endfor %}
+{% endblock %}

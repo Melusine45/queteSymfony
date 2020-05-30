@@ -152,11 +152,29 @@ class WildController extends AbstractController
             'episode' => $episode,
         ]);
     }
+    /**
+     * @Route("/wild/actor", name="wild_all_actor")
+     * @return Response A response instance
+     */
+    public function showActor(): Response
+    {
+        $actors = $this->getDoctrine()
+            ->getRepository(Actor::class)
+            ->findAll();
+
+        if (!$actors) {
+            throw $this->createNotFoundException('No actor found in actor\'s table');
+        }
+
+        return $this->render('wild/show_actor.html.twig', [
+            'actors' => $actors,
+        ]);
+    }
 
     /**
      * @Route("/wild/actor/{id}", name="wild_actor")
      */
-    public function showActor(Actor $actor): Response
+    public function actorProgram(Actor $actor): Response
     {
 
 
