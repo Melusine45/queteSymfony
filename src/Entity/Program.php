@@ -24,7 +24,7 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(message="Veuillez remplir ce champ")
+     * @Assert\NotBlank(message="Indiquer le nom de la série")
      * @Assert\Length(max="255", maxMessage="Le nom de série saisie {{ value }} est trop long, il ne devrait pas dépasser {{ limit }} caractères")
      * @Assert\Regex(pattern="/plus belle la vie/i", match=false, message="On parle de vraies séries ici")
      *
@@ -33,7 +33,7 @@ class Program
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Veuillez remplir ce champ")
+     * @Assert\NotBlank(message="Remplir le champ synopsys")
      */
     private $summary;
 
