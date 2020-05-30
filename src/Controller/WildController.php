@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\Actor;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\ProgramSearchType;
@@ -149,6 +150,18 @@ class WildController extends AbstractController
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+        ]);
+    }
+
+    /**
+     * @Route("/wild/actor/{id}", name="wild_actor")
+     */
+    public function showActor(Actor $actor): Response
+    {
+
+
+        return $this->render('wild/actor.html.twig', [
+            'actor' => $actor,
         ]);
     }
 }
