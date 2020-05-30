@@ -33,7 +33,7 @@ class Program
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Remplir le champ synopsys")
+     * @Assert\NotBlank(message="Remplir le champ synopsis")
      */
     private $summary;
 
