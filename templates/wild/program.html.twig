@@ -4,7 +4,7 @@
 {% block body %}
 
     <div class="media">
-        <!--<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">-->
+        <!--<img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">-->
         <div class="media-body">
             <h1 class="mt-0">{{ program.title }}</h1>
             <img class="card-img-top" src="{{ program.poster }}" alt="{{ program.title }} poster">
@@ -21,21 +21,23 @@
                 <a href="{{ path('wild_season', {id: season.id}) }}">Voir les épisodes
                 </a>
                 <p>
-                <a href="{{ path('wild_show', {'id' : program.id  })}}" >
-                    Retour à la fiche série
-                </a>
+                    <a href="{{ path('wild_show', {'id' : program.id  }) }}">
+                        Retour à la fiche série
+                    </a>
                 </p>
                 <strong>Acteur :</strong>
 
-            {%  endfor %}
+            {% endfor %}
             <strong>Acteur :</strong>
-            <ul>
-                {% for actor in program.actors %}
-                    <li>{{ actor.name }} </li>
-                {% else %}
-                    <li>Aucun acteur pour cette série</li>
-                {% endfor %}
-            </ul>
+
+            {% for actor in program.actors %}
+                <div>
+                <a href="{{ path('wild_actor', {'id' : actor.id }) }}">{{ actor.name }} </a>
+            {% else %}
+                <p>Aucun acteur pour cette série</p>
+                </div>
+            {% endfor %}
+
 
         </div>
 

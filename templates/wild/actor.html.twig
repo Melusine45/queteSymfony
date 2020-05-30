@@ -6,15 +6,16 @@
         <div class="media-body">
             <h1>{{ actor.name }}</h1>
             <h2 class="mt-0">Séries dans lesquelles il/elle apparaît:</h2>
-            <ul>
                 {% for program in programs %}
-                <li>
+                    <div>
+                <a href="{{ path('wild_show', {'id' : program.id }) }}">
                     {{ program.title }}
-                </li>
+                </a>
                 {% else %}
-                    <li>Aucune série pour cet acteur</li>
+                   <p>Aucune série pour cet acteur</p>
+                    </div>
+
                 {% endfor %}
-            </ul>
         </div>
     </div>
     <a href="{{ path('wild_all_actor') }}" class="btn btn-primary">
