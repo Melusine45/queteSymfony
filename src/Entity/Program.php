@@ -164,6 +164,7 @@ class Program
         return $this->actors;
     }
 
+
     public function addActor(Actor $actor): self
     {
         if (!$this->actors->contains($actor)) {
