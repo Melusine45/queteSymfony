@@ -17,10 +17,10 @@ class FakerSeasonFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 50; $i++) {
             $season = new Season();
-            $season->setNumber($faker->numberBetween(1, 15));
+            $season->setNumber($faker->numberBetween(1, 10));
             $season->setYear($faker->year);
             $season->setDescription($faker->text);
-            $season->setProgram($this->getReference('program_' . rand(0, 4)));
+            $season->setProgram($this->getReference('program_' . rand(0, 5)));
             $manager->persist($season);
             $this->addReference('season_' . $i, $season);
 

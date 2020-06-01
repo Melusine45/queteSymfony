@@ -103,7 +103,7 @@ class WildController extends AbstractController
 
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
-            ->findBy(['program' => $program], ['id' => 'asc']);
+            ->findBy(['program' => $program], ['number' => 'asc']);
 
         return $this->render('wild/program.html.twig', [
             'program' => $program,
@@ -131,7 +131,7 @@ class WildController extends AbstractController
 
         $episodes = $this->getDoctrine()
             ->getRepository(Episode::class)
-            ->findBy(['season' => $id], ['id' => 'asc']);
+            ->findBy(['season' => $id], ['number' => 'asc']);
         if (!$episodes) {
             throw $this->createNotFoundException(
                 'No episode found in episode\'s table.'
