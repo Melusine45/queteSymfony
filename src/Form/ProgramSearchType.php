@@ -14,5 +14,4 @@ class ProgramSearchType extends AbstractType
     {
         $builder->add('searchField');
     }
-
 }

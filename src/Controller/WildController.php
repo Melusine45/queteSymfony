@@ -8,8 +8,9 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Actor;
 use App\Form\CategoryType;
-use Symfony\Component\HttpFoundation\Response;
 use App\Form\ProgramSearchType;
+use App\Repository\ProgramRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -23,17 +24,24 @@ class WildController extends AbstractController
      * Show all rows from Program's entity
      *
      * @Route("/wild", name="wild_index")
+     * @param Request $request
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(Request $request, ProgramRepository $programRepository): Response
     {
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
             ->findAll();
-        $form = $this->createForm(ProgramSearchType::class, null, ['method' => Request::METHOD_GET]);
 
         if (!$programs) {
             throw $this->createNotFoundException('No program found in program\'s table');
+        }
+        $form = $this->createForm(ProgramSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+            $programs = $programRepository ->searchProgram($data);
         }
 
         return $this->render('wild/index.html.twig', [
