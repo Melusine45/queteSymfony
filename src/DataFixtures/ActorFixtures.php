@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+
 class ActorFixtures extends Fixture implements DependentFixtureInterface
 {
     const ACTORS = [
@@ -31,12 +32,13 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
             'programs' => [
                 'program_0',
             ],
-        ]
+        ],
     ];
 
     public function load(ObjectManager $manager)
     {
         foreach (self::ACTORS as $actorName => $data) {
+
             $actor = new Actor();
             $actor->setName($actorName);
             foreach ($data['programs'] as $program) {
@@ -48,7 +50,6 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
     }
-
 
     public function getDependencies()
     {
