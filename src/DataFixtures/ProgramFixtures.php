@@ -3,12 +3,11 @@
 
 namespace App\DataFixtures;
 
-use app\Entity\Actor;
 use App\Entity\Program;
+use App\Entity\Actor;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
 
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
@@ -53,9 +52,11 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle($title);
             $program->setSummary($data['summary']);
             $program->setCategory($this->getReference($data ['category']));
-
-            $manager->persist($program);
+            for ($j = 0 ; $j <= 5; $j++) {
+                $program->addActor($this->getReference('actor_'.rand(0,49)));
+            }
             $this->addReference('program_' . $i, $program);
+            $manager->persist($program);
             $i++;
         }
         $manager->flush();
