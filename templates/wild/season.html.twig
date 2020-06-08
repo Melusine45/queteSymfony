@@ -17,7 +17,7 @@
             {% for episode in episodes %}
 
             <h3 class="mt-0">Episode {{ episode.number }} </h3>
-                <a href="{{ path('wild_episode', {'id' : episode.id}) }}">détail de l'épisode</a>
+                <a href="{{ path('wild_episode', {'slug' : episode.slug}) }}">détail de l'épisode</a>
             {%  endfor %}
         </div>
     </div>
