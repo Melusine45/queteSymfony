@@ -41,8 +41,7 @@ class ProgramController extends AbstractController
             $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
-
-            return $this->redirectToRoute('program_index');
+            //return $this->redirectToRoute('program_index');
         }
 
         return $this->render('program/new.html.twig', [
