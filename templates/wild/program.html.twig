@@ -21,22 +21,14 @@
                 <a href="{{ path('wild_season', {id: season.id}) }}">Voir les épisodes
                 </a>
                 <p>
-                    <a href="{{ path('wild_show', {'id' : program.id  }) }}">
+                    <a href="{{ path('wild_show', {'slug' : program.slug  }) }}">
                         Retour à la fiche série
                     </a>
                 </p>
                 <strong>Acteur :</strong>
 
             {% endfor %}
-            <strong>Acteur :</strong>
 
-            {% for actor in program.actors %}
-                <div>
-                <a href="{{ path('wild_actor', {'id' : actor.id }) }}">{{ actor.name }} </a>
-            {% else %}
-                <p>Aucun acteur pour cette série</p>
-                </div>
-            {% endfor %}
 
 
         </div>

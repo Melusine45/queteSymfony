@@ -8,7 +8,7 @@
             <h2 class="mt-0">Séries dans lesquelles il/elle apparaît:</h2>
                 {% for program in programs %}
                     <div>
-                <a href="{{ path('wild_show', {'id' : program.id }) }}">
+                <a href="{{ path('wild_show', {'slug' : program.slug }) }}">
                     {{ program.title }}
                 </a>
                 {% else %}

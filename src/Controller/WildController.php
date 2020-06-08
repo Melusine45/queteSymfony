@@ -10,6 +10,7 @@ use App\Entity\Actor;
 use App\Form\CategoryType;
 use App\Form\ProgramSearchType;
 use App\Repository\ProgramRepository;
+use App\Service\Slugify;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,6 +51,40 @@ class WildController extends AbstractController
         ]);
     }
 
+    /**
+     * Getting a program with a formatted slug for title
+     *
+     * @Route("/wild/show/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="wild_show")
+     * @param string $slug
+     * @return Response
+     */
+    public function show(?string $slug) : Response
+    {
+        if (!$slug) {
+            throw $this
+                ->createNotFoundException('No slug has been sent to find a program in program\'s table.');
+        }
+        $slug = preg_replace(
+            '/-/',
+            ' ', ucwords(trim(strip_tags($slug)), "-")
+        );
+        $program = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findOneBy(['title' => mb_strtolower($slug)]);
+        if (!$program) {
+            throw $this->createNotFoundException(
+                'No program with ' . $slug . ' title, found in program\'s table.'
+            );
+
+        }
+
+
+        return $this->render('wild/show.html.twig', [
+            'program' => $program,
+            'slug' => $slug,
+
+        ]);
+    }
 
     /**
      * @Route("/wild/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="wild_category")
@@ -84,12 +119,16 @@ class WildController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/wild/show/{id}", name="wild_show")
+     * @Route("/wild/program/{slug}", name="show_program")
      * @return Response
      */
-    public function show(program $program): Response
+    public function showProgram(program $program, Slugify $slugify): Response
     {
+        $slug = $slugify->generate($program->getTitle());
+        $program->setSlug($slug);
+
         if (!$program) {
             throw $this
                 ->createNotFoundException('No program Name has been sent to find a program in program\'s table.');
@@ -180,11 +219,13 @@ class WildController extends AbstractController
     }
 
     /**
-     * @Route("/wild/actor/{id}", name="wild_actor")
+     * @Route("/wild/actor/{slug}", name="wild_actor")
      */
-    public function actorProgram(Actor $actor): Response
+    public function actorProgram(Actor $actor, Slugify $slugify): Response
     {
         $programs = $actor->getPrograms();
+        $slug = $slugify->generate($actor->getName());
+        $actor->setSlug($slug);
 
         return $this->render('wild/actor.html.twig', [
             'actor' => $actor,

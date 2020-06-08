@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ program.id }}{% endblock %}
+{% block title %}{{ program.title }}{% endblock %}
 
 {% block body %}
 
@@ -9,8 +9,20 @@
             <h1 class="mt-0">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
             <p>Categorie : {{ program.category.name }}</p>
-            <a href=" {{ path('wild_show', {'id' : program.id }) }} ">voir toutes les saisons</a>
+            <a href=" {{ path('show_program', {'slug' : program.slug }) }} ">voir toutes les saisons</a>
         </div>
+
+    </div>
+    <div class="m-2">
+     <strong>Acteur :</strong>
+
+                        {% for actor in program.actors %}
+                            <div>
+                            <a href="{{ path('wild_actor', {'slug' : actor.slug }) }}">{{ actor.name }} </a>
+                        {% else %}
+                            <p>Aucun acteur pour cette série</p>
+                            </div>
+                        {% endfor %}
     </div>
     <a href="{{ path('wild_index') }}" class="btn btn-primary">
         Retour à l'accueil

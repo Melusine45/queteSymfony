@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Program;
 use App\Entity\Actor;
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -46,11 +47,14 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $slugify = new Slugify();
         $i = 0;
         foreach (self::PROGRAMS as $title => $data){
             $program = new Program();
             $program->setTitle($title);
             $program->setSummary($data['summary']);
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $program->setCategory($this->getReference($data ['category']));
             for ($j = 0 ; $j <= 5; $j++) {
                 $program->addActor($this->getReference('actor_'. rand(0,49)));
