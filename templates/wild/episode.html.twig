@@ -8,6 +8,13 @@
             <h1>{{ program.title }}</h1>
             <h2 class="mt-0">Saison {{ season.number }}</h2>
         </div>
+        <a href="{{ path('wild_season', {'id' : season.id}) }}" class="btn btn-primary">Retour aux épisodes</a>
+        <p></p>
+        <a href=" {{ path('show_program', {'slug' : program.slug }) }}" class="btn btn-primary ">voir toutes les saisons</a>
+        <p></p>
+        <a href="{{ path('wild_index') }}" class="btn btn-back">
+            Retour à l'accueil
+        </a>
     </div>
     <br>
     <div class="media">
@@ -15,14 +22,12 @@
             <h3 class="mt-0">Episode {{ episode.number }} </h3>
             <h4>{{ episode.title }}</h4>
             <p>{{ episode.synopsis }}</p>
-            <a href="{{ path('wild_season', {'id' : season.id}) }}">Retour aux épisodes</a>
-            <p></p>
-            <a href=" {{ path('show_program', {'slug' : program.slug }) }} ">voir toutes les saisons</a>
-            <p></p>
         </div>
+
     </div>
-    <a href="{{ path('wild_index') }}" class="btn btn-primary">
-        Retour à l'accueil
-    </a>
+    <div class="media">Avis sur l'épisode
+        {%include 'comment/new.html.twig' %}
+    </div>
+
 
 {% endblock %}
