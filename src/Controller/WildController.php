@@ -7,8 +7,11 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Actor;
+use App\Entity\Comment;
 use App\Form\CategoryType;
+use App\Form\CommentType;
 use App\Form\ProgramSearchType;
+use App\Repository\CommentRepository;
 use App\Repository\ProgramRepository;
 use App\Service\Slugify;
 use Symfony\Component\HttpFoundation\Response;
@@ -188,17 +191,33 @@ class WildController extends AbstractController
     /**
      * @Route("/wild/episode/{slug}", name="wild_episode")
      */
-    public function showEpisode(Episode $episode, Slugify $slugify): Response
+    public function showEpisode(Episode $episode, Slugify $slugify, CommentRepository $commentRepository, Request $request): Response
     {
         $season = $episode->getSeason();
         $program = $season->getProgram();
         $slug = $slugify->generate($episode->getTitle());
         $episode->setSlug($slug);
 
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+        }
+
         return $this->render('wild/episode.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+            'user'=>$this->getUser(),
+            'comments' => $commentRepository->findBy(['episode' => $episode]),
+            'form' => $form->createView(),
         ]);
     }
     /**

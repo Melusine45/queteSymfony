@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use App\Entity\User;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class CommentType extends AbstractType
 {
@@ -13,9 +17,15 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment')
-            ->add('rate')
-            ->add('episode', null, ['choice_label' => 'number'])
-            ->add('author', null,  ['choice_label' => 'email'])
+            ->add('rate', ChoiceType::class, [
+                'choices' => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ], 'multiple' => false
+            ])
         ;
     }
 
