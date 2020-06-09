@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="text-center">Administration</h1>
+<div class="text-center">
+    <a class="nav-link" href="{{ path('program_index') }}">Séries</a>
+    <a class="nav-link" href="{{ path('category_add') }}">Catégories</a>
+    <a class="nav-link" href="{{ path('season_index') }}">Saisons</a>
+    <a class="nav-link" href="{{ path('episode_index') }}">Episodes</a>
+    <a class="nav-link" href="{{ path('actor_index') }}">Acteurs</a>
+</div>
+{% endblock %}
