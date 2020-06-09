@@ -18,13 +18,14 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-       $subscriber = new User();
-       $subscriber->setEmail('subscriber@monsite.com');
-       $subscriber->setRoles(['ROLE_SUBSCRIBER']);
-       $subscriber->setUsername('Username');
-       $subscriber->setPassword($this->passwordEncoder->encodePassword(
-           $subscriber, 'subscriberpassword'
-       ));
+
+        $subscriber = new User();
+        $subscriber->setEmail('userTest@monsite.com');
+        $subscriber->setRoles(['ROLE_SUBSCRIBER']);
+        $subscriber->setUsername('Test');
+        $subscriber->setPassword($this->passwordEncoder->encodePassword(
+            $subscriber, 'subscriberpassword'
+        ));
 
        $manager->persist($subscriber);
 

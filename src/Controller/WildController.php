@@ -216,7 +216,7 @@ class WildController extends AbstractController
             'season' => $season,
             'episode' => $episode,
             'user'=>$this->getUser(),
-            'comments' => $commentRepository->findBy(['episode' => $episode]),
+            'comments' => $commentRepository->findBy(['episode' => $episode], ['id'=>'asc']),
             'form' => $form->createView(),
         ]);
     }
