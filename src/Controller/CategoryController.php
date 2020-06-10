@@ -7,6 +7,7 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\ProgramSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -19,6 +20,7 @@ class CategoryController extends AbstractController
 {
     /**
      * @Route("/category/add", name="category_add", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request): Response
     {

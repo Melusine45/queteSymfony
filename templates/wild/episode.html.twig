@@ -26,15 +26,7 @@
 
     </div>
     <div class="media text-primary justify-content-center">Avis sur l'épisode</div>
-    <div class="media row">
-{% for comment in comments %}
-    <div class="col">
-        <p>{{ comment.comment }}</p>
-        <p><span class="text-danger">{{ comment.rate }} </span>/5,
-    {{ comment.author.username }}</p>
-    </div>
-        {% endfor %}
-    </div>
+
     <div>
         {% if is_granted('ROLE_SUBSCRIBER') %}
 
@@ -48,5 +40,14 @@
         {% endif %}
     </div>
 
+    <div class="flex-wrap row justify-content-center">
+        {% for comment in comments %}
+            <div class="card w-25 bg-light border border-primary rounded text-center">
+                <p>{{ comment.comment }}</p>
+                <p><span class="text-danger">{{ comment.rate }} </span>/5,
+                    {{ comment.author.username }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
