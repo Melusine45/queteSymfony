@@ -18,7 +18,7 @@ class CommentController extends AbstractController
 {
     /**
      * @Route("/", name="comment_index", methods={"GET"})
-     *  @IsGranted("ADMIN")
+     *  @IsGranted("ROLE_ADMIN")
      */
     public function index(CommentRepository $commentRepository): Response
     {
@@ -53,7 +53,7 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}", name="comment_show", methods={"GET"})
-     * @IsGranted("ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show(Comment $comment): Response
     {
@@ -64,7 +64,7 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="comment_edit", methods={"GET","POST"})
-     * @IsGranted("ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Comment $comment): Response
     {
@@ -85,7 +85,7 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}", name="comment_delete", methods={"DELETE"})
-     * @IsGranted("ADMIN")
+     * @IsGranted("ROLE_SUBSCRIBER")
      */
     public function delete(Request $request, Comment $comment): Response
     {
@@ -95,6 +95,6 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('comment_index');
+        return $this->redirectToRoute('wild_index');
     }
 }
