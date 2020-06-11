@@ -8,6 +8,7 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Actor;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\CategoryType;
 use App\Form\CommentType;
 use App\Form\ProgramSearchType;
@@ -202,22 +203,24 @@ class WildController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $comment->setAuthor($this->getUser());
             $comment->setEpisode($episode);
             $entityManager->persist($comment);
             $entityManager->flush();
-
         }
 
+        $comments = $commentRepository->findBy(['episode' => $episode], ['id'=>'asc']);
 
         return $this->render('wild/episode.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
             'user'=>$this->getUser(),
-            'comments' => $commentRepository->findBy(['episode' => $episode], ['id'=>'asc']),
+            'comments' => $comments,
             'form' => $form->createView(),
         ]);
     }
