@@ -211,6 +211,8 @@ class WildController extends AbstractController
             $comment->setEpisode($episode);
             $entityManager->persist($comment);
             $entityManager->flush();
+
+            return $this->redirectToRoute('wild_episode', ['slug' => $episode->getSlug()]);
         }
 
         $comments = $commentRepository->findBy(['episode' => $episode], ['id'=>'asc']);
