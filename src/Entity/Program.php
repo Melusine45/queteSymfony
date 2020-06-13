@@ -42,7 +42,7 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @var sting
+     * @var string
      */
     private $poster;
 
@@ -74,7 +74,7 @@ class Program
     private $slug;
 
     /**
-     * @ORM\Column(type="Datetime")
+     * @ORM\Column(type="Datetime", nullable=true)
      * @var DateTime
      */
     private $updatedAt;
@@ -127,7 +127,7 @@ class Program
     }
     public function setPosterFile(File $image = null)
     {
-        $this->posterFile = $image;
+        $this->imageFile = $image;
         if ($image) {
             $this->updatedAt = new DateTime('now');
         }
