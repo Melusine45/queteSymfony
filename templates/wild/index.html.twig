@@ -12,7 +12,7 @@
     {% for program in programs %}
         <div class="card-deck mb-5">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{ asset('uploads/'~program.poster )}}" alt="{{ program.title }} poster">
+                <img class="card-img-top" src="{{ asset('uploads/posters/'~program.poster )}}" alt="{{ program.title }} poster">
                 <div class="card-body">
                     <h5 class="card-title">{{ loop.index }} / {{ program.title }}</h5>
                     <h6 class="card-title"> Catégorie : {{ program.category.name }}</h6>
