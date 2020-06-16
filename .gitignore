@@ -1,5 +1,7 @@
 
 ###> symfony/framework-bundle ###
+/public/uploads/
+/public/uploads/posters/
 /.env.local
 /.env.local.php
 /.env.*.local
