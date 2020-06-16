@@ -9,6 +9,7 @@ use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Faker;
 
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface

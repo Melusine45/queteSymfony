@@ -46,6 +46,7 @@ security:
         - { path: '^/season', roles: ROLE_ADMIN }
         - { path: '^/category', roles: ROLE_ADMIN }
         - { path: '^/actor', roles: ROLE_ADMIN }
+        - { path: '^/my_profile', roles: ROLE_SUBSCRIBER }
 
         # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*
         - { path: '^/admin', roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }

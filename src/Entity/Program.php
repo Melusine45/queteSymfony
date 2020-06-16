@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
@@ -48,7 +49,7 @@ class Program
 
     /**
      * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
-     * @var File
+     * @var File|null
      */
     private $posterFile;
 
@@ -75,7 +76,7 @@ class Program
 
     /**
      * @ORM\Column(type="datetime")
-     * @var \DateTime
+     * @var DateTime
      */
     private $updatedAt;
 
