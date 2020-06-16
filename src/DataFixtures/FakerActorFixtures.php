@@ -22,6 +22,7 @@ class FakerActorFixtures extends Fixture
             $actor->setName($faker->name);
             $slug = $slugify->generate($actor->getName());
             $actor->setSlug($slug);
+            $actor->setImage($faker->imageUrl());
             $this->addReference('actor_' . $j, $actor);
             $manager->persist($actor);
             $j++;

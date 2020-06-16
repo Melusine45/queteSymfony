@@ -5,6 +5,7 @@
     <div class="media">
         <div class="media-body">
             <h1>{{ actor.name }}</h1>
+            <img src="{{ vich_uploader_asset(actor, 'imageFile')}}" alt="{{ actor.name }} image">
             <h2 class="mt-0">Séries dans lesquelles il/elle apparaît:</h2>
                 {% for program in programs %}
                     <div>

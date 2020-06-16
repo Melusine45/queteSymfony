@@ -8,19 +8,21 @@
     <table class="table">
         <thead>
             <tr class="d-flex">
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>actions</th>
+                <th class="col-1">Id</th>
+                <th class="col-2">Name</th>
+                <th class="col-2">Slug</th>
+                <th class="col-2">Aperçu</th>
+                <th class="col-2">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for actor in actors %}
             <tr class="d-flex">
-                <td>{{ actor.id }}</td>
-                <td>{{ actor.name }}</td>
-                <td>{{ actor.slug }}</td>
-                <td>
+                <td class="col-1">{{ actor.id }}</td>
+                <td class="col-2">{{ actor.name }}</td>
+                <td class="col-2"> <img class="w-25" src="{{ vich_uploader_asset(actor, 'imageFile')}}" alt="{{ actor.name }} image"></td>
+                <td class="col-2">{{ actor.slug }}</td>
+                <td class="col-2">
                     <a class="btn btn-primary" href="{{ path('actor_show', {'slug': actor.slug}) }}">show</a>
                     <a class="btn btn-primary" href="{{ path('actor_edit', {'slug': actor.slug}) }}">edit</a>
                 </td>

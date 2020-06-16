@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActorRepository")
+ * @Vich\Uploadable
  */
 class Actor
 {
@@ -33,6 +37,28 @@ class Actor
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="actor_file", fileNameProperty="image")
+     * @var File|null
+     * @Assert\File(maxSize = "200k",
+     *     maxSizeMessage="Le fichier est trop gros  ({{ size }} {{ suffix }}),
+     *      il ne doit pas dépasser {{ limit }} {{ suffix }}",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/gif","image/png"},
+     *     mimeTypesMessage = "Veuillez entrer un type de fichier valide: jpg, jpeg, png ou gif.")
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var DateTime
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -92,5 +118,30 @@ class Actor
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
     }
 }

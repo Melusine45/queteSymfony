@@ -50,6 +50,12 @@ class Program
     /**
      * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
      * @var File|null
+     * @Assert\File(maxSize = "200k",
+     *     maxSizeMessage="Le fichier est trop gros  ({{ size }} {{ suffix }}),
+     *      il ne doit pas dépasser {{ limit }} {{ suffix }}",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/gif","image/png"},
+     *     mimeTypesMessage = "Veuillez entrer un type de fichier valide: jpg, jpeg, png ou gif.")
+     */
      */
     private $posterFile;
 

@@ -9,3 +9,9 @@ vich_uploader:
             upload_destination: '%upload_directory%/posters'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
 
+        actor_file:
+            # alias qui nous permet d'accéder à nos images depuis le navigateur
+            uri_prefix: /uploads/actors
+            # Chemin vers le dossier de stockage
+            upload_destination: '%upload_directory%/actors'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

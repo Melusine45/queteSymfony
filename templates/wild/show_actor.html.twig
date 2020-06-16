@@ -10,6 +10,7 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h6 class="card-title"> {{ actor.name }}</h6>
+                    <img class="w-25" src="{{ vich_uploader_asset(actor, 'imageFile')}}" alt="{{ actor.name }} image">
                     <a href="{{ path('wild_actor', {'slug' : actor.slug }) }}" class="btn btn-primary">En savoir plus</a>
                 </div>
             </div>
