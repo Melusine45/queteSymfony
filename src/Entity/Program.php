@@ -56,7 +56,6 @@ class Program
      *     mimeTypes = {"image/jpeg", "image/jpg", "image/gif","image/png"},
      *     mimeTypesMessage = "Veuillez entrer un type de fichier valide: jpg, jpeg, png ou gif.")
      */
-     */
     private $posterFile;
 
     /**
