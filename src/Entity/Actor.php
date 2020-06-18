@@ -57,7 +57,7 @@ class Actor
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var DateTime
+     * @var DateTime|null
      */
     private $updatedAt;
 
