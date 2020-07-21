@@ -11,6 +11,9 @@
         {% block header %}
         {%  include 'navbar.html.twig' %}
         {% endblock %}
+        {% block flash %}
+            {%  include '_flash.html.twig' %}
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
            {{ encore_entry_script_tags('app') }}
